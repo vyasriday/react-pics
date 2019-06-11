@@ -1,26 +1,32 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component } from 'react';
 
 class SearchBar extends Component {
   state = {
     term: ''
   }
 
-  onInput(event) {
+  onInputChange(event) {
     this.setState({
-      term: event.target.value.toUpperCase()
+      term: event.target.value
     })
+  }
+
+  onFormSubmit(event) {
+    event.preventDefault();
+    this.props.getSearchTerm(this.state.term);
   }
 
   render() {
     return (
-      <Fragment>
-      <input value={this.state.term} onChange={this.onInput.bind(this)} onKeyUp = {(event) => {
-        if(event.keyCode === 13) {
-          console.log('Enter Key Pressed!!!');
-        }
-      }} />
-      {this.state.term}
-      </Fragment>
+      <div className="ui segment">
+        <form className="ui form" onSubmit={this.onFormSubmit.bind(this)} >
+          <div className="filed">
+            <label> Image Search
+              <input value={this.state.term} onChange={this.onInputChange.bind(this)} />
+            </label>
+          </div>
+        </form>
+      </div>
     )
   }
 }
