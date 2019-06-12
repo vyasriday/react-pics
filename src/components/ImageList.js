@@ -2,7 +2,7 @@ import React from 'react';
 
 const ImageList = (props) => {
   return (
-    <p>Images</p>
+    <p>Found {props.images.length} Images</p>
   )
 }
 
